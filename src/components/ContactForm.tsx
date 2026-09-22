@@ -46,14 +46,14 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-2">
+        <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">
           Name *
         </label>
         <input
           id="name"
           type="text"
           {...register("name")}
-          className="w-full px-4 py-2 border rounded"
+          className="w-full px-4 py-3 border border-divider rounded bg-paper text-ink focus:outline-none focus:border-accent transition-colors"
           disabled={status === "loading"}
         />
         {errors.name && (
@@ -62,14 +62,14 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-ink mb-2">
           Email *
         </label>
         <input
           id="email"
           type="email"
           {...register("email")}
-          className="w-full px-4 py-2 border rounded"
+          className="w-full px-4 py-3 border border-divider rounded bg-paper text-ink focus:outline-none focus:border-accent transition-colors"
           disabled={status === "loading"}
         />
         {errors.email && (
@@ -78,40 +78,40 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="company" className="block text-sm font-medium mb-2">
+        <label htmlFor="company" className="block text-sm font-medium text-ink mb-2">
           Company
         </label>
         <input
           id="company"
           type="text"
           {...register("company")}
-          className="w-full px-4 py-2 border rounded"
+          className="w-full px-4 py-3 border border-divider rounded bg-paper text-ink focus:outline-none focus:border-accent transition-colors"
           disabled={status === "loading"}
         />
       </div>
 
       <div>
-        <label htmlFor="service" className="block text-sm font-medium mb-2">
+        <label htmlFor="service" className="block text-sm font-medium text-ink mb-2">
           Service Interested In
         </label>
         <input
           id="service"
           type="text"
           {...register("service")}
-          className="w-full px-4 py-2 border rounded"
+          className="w-full px-4 py-3 border border-divider rounded bg-paper text-ink focus:outline-none focus:border-accent transition-colors"
           disabled={status === "loading"}
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-2">
+        <label htmlFor="message" className="block text-sm font-medium text-ink mb-2">
           Message *
         </label>
         <textarea
           id="message"
           rows={6}
           {...register("message")}
-          className="w-full px-4 py-2 border rounded"
+          className="w-full px-4 py-3 border border-divider rounded bg-paper text-ink focus:outline-none focus:border-accent transition-colors resize-none"
           disabled={status === "loading"}
         />
         {errors.message && (
@@ -143,17 +143,25 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="px-6 py-3 bg-black text-white rounded disabled:opacity-50"
+        className="w-full px-8 py-4 bg-ink text-paper font-medium rounded hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "loading" ? "Sending..." : "Send Message"}
       </button>
 
       {status === "success" && (
-        <p className="text-green-600">Message sent successfully!</p>
+        <div className="p-4 bg-green-50 border border-green-200 rounded">
+          <p className="text-green-800 font-medium">
+            ✓ Message sent successfully! We'll get back to you soon.
+          </p>
+        </div>
       )}
 
       {status === "error" && (
-        <p className="text-red-600">{errorMessage || "Failed to send message"}</p>
+        <div className="p-4 bg-red-50 border border-red-200 rounded">
+          <p className="text-red-800 font-medium">
+            ✗ {errorMessage || "Failed to send message. Please try again."}
+          </p>
+        </div>
       )}
     </form>
   );
